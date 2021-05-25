@@ -2,8 +2,8 @@ import cv2
 import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-idlegif = cv2.VideoCapture("idle.gif")
-rungif = cv2.VideoCapture("run.gif")
+idlegif = cv2.VideoCapture("resource/idle.gif")
+rungif = cv2.VideoCapture("resource/run.gif")
 
 curgif = rungif
 
@@ -25,15 +25,17 @@ def run():
         else:
             print('no video')
             curgif.set(cv2.CAP_PROP_POS_FRAMES, 0)
-            
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-
-        if cv2.waitKey(1) & 0xFF == ord('i'):
+        
+        key = cv2.waitKey(33) & 0xFF
+       
+        
+        if(key == ord('i')):
             idle()
-
-        if cv2.waitKey(1) & 0xFF == ord('r'):
+        if(key == ord('r')):
             proc()
+       
+        if(key == ord('q')):
+            break;
 
 if __name__ == "__main__":
     run()

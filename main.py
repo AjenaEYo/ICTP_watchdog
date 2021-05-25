@@ -10,7 +10,7 @@ class ExampleHandler(FileSystemEventHandler):
 observer = Observer()
 event_handler = ExampleHandler() # create event handler
 # set observer to use created handler in directory
-observer.schedule(event_handler, path="C:/Users/ajena/Documents/ShareX/Screenshots/2021-05")
+observer.schedule(event_handler, path="C:\\Users\\ruina\\Documents\\ShareX\\Screenshots\\2021-05")
 observer.start()
 
 # sleep until keyboard interrupt, then stop + rejoin the observer
