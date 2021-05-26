@@ -13,8 +13,8 @@ class ExampleHandler(FileSystemEventHandler):
         self.q.put(1)
         a=trans_story()
         a.run(event.src_path,self.q)
-        b=trans()
-        b.run(event.src_path,self.q)
+        #b=trans()
+        #b.run(event.src_path,self.q)
         self.q.put(0)
 
 class watchimage:
