@@ -8,8 +8,8 @@ import animated
 
 if __name__ == '__main__':
     freeze_support()
-    progess = animated.progess()
-    vision = 0
+    q = multiprocessing.Queue()
+    progess = animated.progess(q)
     watchimg = watchimage.watchimage()
     config = configparser.ConfigParser()
     config.read('config.ini')
@@ -20,16 +20,17 @@ if __name__ == '__main__':
 
     procs = []
     #watch = Process(target=watchimg.run, args=(progess,vision,capture_path,)) 
-    q = multiprocessing.Queue()
+    
     watch = Process(target=watchimg.run, args=(q,capture_path,)) 
     watch.daemon = True
     procs.append(watch) 
     watch.start()
 
-    progess.run(q)
+    progess.run()
+    watchimg.stop()
     # progess = Process(target=animated.run, args=(None,None,)) 
     # procs.append(progess) 
     # progess.start()
     
-    for proc in procs: 
-        proc.join()
+    # for proc in procs: 
+    #     proc.join()
