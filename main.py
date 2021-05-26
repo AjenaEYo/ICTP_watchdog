@@ -1,23 +1,35 @@
-import time 
-from watchdog.observers import Observer
-from watchdog.events import FileSystemEventHandler
+import configparser
+from multiprocessing import Process,freeze_support
+import multiprocessing
+from platform import version
+import watchimage
+import animated
 
-class ExampleHandler(FileSystemEventHandler):
-    def on_created(self, event): # when file is created
-        # do something, eg. call your function to process the image
-        print (f'Got event for file {event.src_path}')
 
-observer = Observer()
-event_handler = ExampleHandler() # create event handler
-# set observer to use created handler in directory
-observer.schedule(event_handler, path="C:\\Users\\ruina\\Documents\\ShareX\\Screenshots\\2021-05")
-observer.start()
+if __name__ == '__main__':
+    freeze_support()
+    progess = animated.progess()
+    vision = 0
+    watchimg = watchimage.watchimage()
+    config = configparser.ConfigParser()
+    config.read('config.ini')
 
-# sleep until keyboard interrupt, then stop + rejoin the observer
-try:
-    while True:
-        time.sleep(1)
-except KeyboardInterrupt:
-    observer.stop()
+    capture_path = config['DEFAULT']['CAPTURE_PATH']
 
-observer.join()
+    print(capture_path)
+
+    procs = []
+    #watch = Process(target=watchimg.run, args=(progess,vision,capture_path,)) 
+    q = multiprocessing.Queue()
+    watch = Process(target=watchimg.run, args=(q,capture_path,)) 
+    watch.daemon = True
+    procs.append(watch) 
+    watch.start()
+
+    progess.run(q)
+    # progess = Process(target=animated.run, args=(None,None,)) 
+    # procs.append(progess) 
+    # progess.start()
+    
+    for proc in procs: 
+        proc.join()
