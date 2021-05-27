@@ -49,18 +49,21 @@ class trans_story:
 
         image1_size = img.size
         image2_size = fontimg.size
-        img_w=max(image1_size[0],image2_size[0])
+       
         y_text = 0
-        
+        w_x= []
+        w_x.append(image1_size[0])
         for line in lines:
             line_width, line_height = font.getsize(line)
             fontdraw.text(((image1_size[0] - line_width) / 2, y_text), 
                     line, font=font, fill=(209, 239, 8))
             y_text += line_height
+            w_x.append(line_width)
         #fontdraw.text((0, 0), text, fill=(209, 239, 8), font=font)
         
-       
-        new_image = Image.new('RGB',(image1_size[0], image1_size[1]+image2_size[1]), (250,250,250))
+        img_w = max(w_x)
+        print(img_w)
+        new_image = Image.new('RGB',(img_w, image1_size[1]+image2_size[1]), (250,250,250))
         new_image.paste(img,(0,0))
         new_image.paste(fontimg,(0,image1_size[1]))
         image=np.array(new_image)
