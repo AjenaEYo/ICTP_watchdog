@@ -19,3 +19,5 @@ config.ini에 스크린샷 저장 폴더 설정
 ``` bash
 python main.py
 ```
+
+![Screenshot](https://github.com/AjenaEYo/ICTP_watchdog/blob/develop/example/first_test.gif)
