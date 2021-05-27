@@ -13,8 +13,11 @@ pip install torch==1.8.1+cu102 torchvision==0.9.1+cu102 torchaudio===0.8.1 -f ht
 
 pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 torchaudio===0.8.1 -f https://download.pytorch.org/whl/torch_stable.html
 ```
+config.ini에 스크린샷 저장 폴더 설정
 
 실행
 ``` bash
 python main.py
 ```
+
+![Screenshot](https://github.com/AjenaEYo/ICTP_watchdog/blob/develop/example/first_test.gif)
