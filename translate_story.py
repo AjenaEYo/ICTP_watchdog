@@ -90,10 +90,11 @@ class trans_story:
         print("텍스트 그리기 완료")
         fps='FPS {}'.format(1 / (time() - loop_time))
         cv.putText(screenshot, fps, (0, 10),cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-        cv.imshow('Computer Vision', screenshot)
+        
+        cv.imshow(os.path.basename(path), screenshot)
         q.put(0)
         cv.waitKey(0)
-        cv.destroyWindow('Computer Vision')
+        cv.destroyWindow(os.path.basename(path))
         print("끝")
 
 
