@@ -4,6 +4,11 @@ from watchdog.events import FileSystemEventHandler
 from translate import trans
 from translate_story import trans_story
 import threading
+
+def work(path,q):
+    a=trans_story()
+    a.run(path,q)
+
 class ExampleHandler(FileSystemEventHandler):
     def __init__(self,q):
         self.q=q
@@ -11,11 +16,13 @@ class ExampleHandler(FileSystemEventHandler):
         # do something, eg. call your function to process the image
         print (f'Got event for file {event.src_path}')
         self.q.put(1)
-        a=trans_story()
-        a.run(event.src_path,self.q)
+        t1 = threading.Thread(target=work,args=(event.src_path, self.q))
+        t1.start()
+        # a=trans_story()
+        # a.run(event.src_path,self.q)
         #b=trans()
         #b.run(event.src_path,self.q)
-        self.q.put(0)
+        #self.q.put(0)
 
 class watchimage:
     is_run=True
