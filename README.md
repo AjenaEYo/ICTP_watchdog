@@ -29,4 +29,4 @@ python main.py
 watchdog에서 생성된 파일 경로를 읽는다<br />
 번역하고, text를 이미지에 넣어 출력해준다<br />
 
-[설치가이드로 이동합니다.](./install_guild/README.md)
+[설치가이드로 이동합니다.](./install_guild/ICTP_watchdog-셋팅%20방법.txt)
