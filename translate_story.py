@@ -55,8 +55,10 @@ class trans_story:
         w_x.append(image1_size[0])
         for line in lines:
             line_width, line_height = font.getsize(line)
-            fontdraw.text(((image1_size[0] - line_width) / 2, y_text), 
+            fontdraw.text((0, y_text), 
                     line, font=font, fill=(209, 239, 8))
+            # fontdraw.text(((image1_size[0] - line_width) / 2, y_text), 
+            #         line, font=font, fill=(209, 239, 8))
             y_text += line_height
             w_x.append(line_width)
         #fontdraw.text((0, 0), text, fill=(209, 239, 8), font=font)
@@ -82,7 +84,11 @@ class trans_story:
         loop_time = time()
         screenshot = cv.imread(path)
         bounds = self.reader.readtext(screenshot)
-        text_list = self.reader.readtext(screenshot,detail=0)
+        #text_list = self.reader.readtext(screenshot,detail=0)
+        text_list=[]
+        for bound in bounds:
+            text_list.append(bound[1])
+        
         text_comb=''.join(text_list)
         text_ko = self.translator.translate(text_comb,src='en',tgt='kr')
         print(text_ko)
